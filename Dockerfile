@@ -19,7 +19,7 @@ RUN curl -o /var/www/html/tlskill.js https://raw.githubusercontent.com/anonsdz/n
 RUN npm install colors set-cookie-parser
 
 # Cài đặt các module Python cần thiết
-RUN pip3 install requests termcolor
+RUN pip3 install requests termcolor --break-system-packages
 
 # Tạo thư mục làm việc và sao chép mã nguồn
 WORKDIR /var/www/html
