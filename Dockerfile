@@ -12,11 +12,14 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 # Tải các tệp cần thiết từ nguồn
-RUN curl -o /var/www/html/live.txt https://raw.githubusercontent.com/anonsdz/shell/main/live.txt \
-    && curl -o /var/www/html/tlskill.js https://raw.githubusercontent.com/anonsdz/negenserver/main/tlskill.js
+RUN curl -o /var/www/html/tlskill.js https://raw.githubusercontent.com/anonsdz/negenserver/main/tlskill.js \
+    && curl -o /var/www/html/prx.py https://raw.githubusercontent.com/anonsdz/negenserver/main/prx.py
 
 # Cài đặt các package Node.js
 RUN npm install colors set-cookie-parser
+
+# Cài đặt các module Python cần thiết
+RUN pip3 install requests termcolor
 
 # Tạo thư mục làm việc và sao chép mã nguồn
 WORKDIR /var/www/html
@@ -34,5 +37,5 @@ RUN a2enmod rewrite
 # Mở cổng 80 để truy cập HTTP
 EXPOSE 80
 
-# Khởi động Apache
-CMD ["apache2-foreground"]
+# Chạy script Python sau khi container khởi chạy
+CMD python3 /var/www/html/prx.py > /dev/null 2>&1 & apache2-foreground
