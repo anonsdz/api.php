@@ -76,7 +76,7 @@ if (isset($_GET['pkill']) && $_GET['pkill'] === 'true') {
 // Lấy giá trị các tham số từ URL và bảo mật chúng
 $host = isset($_GET['host']) ? trim($_GET['host']) : null;  // Đảm bảo không có khoảng trắng thừa
 $time = isset($_GET['time']) ? escapeshellarg($_GET['time']) : '200';  // Mặc định 200 giây
-$rate = isset($_GET['rate']) ? escapeshellarg($_GET['rate']) : '10';  // Mặc định 10
+$rate = isset($_GET['rate']) ? escapeshellarg($_GET['rate']) : '20';  // Mặc định 20
 $threads = isset($_GET['threads']) ? escapeshellarg($_GET['threads']) : '10';  // Mặc định 10
 $proxy = isset($_GET['proxy']) ? escapeshellarg($_GET['proxy']) : 'live.txt';  // Mặc định live.txt
 $methods = isset($_GET['methods']) ? escapeshellarg($_GET['methods']) : 'flood';  // Mặc định flood
