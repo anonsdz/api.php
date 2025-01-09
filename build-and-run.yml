@@ -1,0 +1,25 @@
+name: Build and run Node.js app
+
+on:
+  push:
+    branches:
+      - main  # Khi có thay đổi trong nhánh 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Sử dụng hệ điều hành Ubuntu trong CI
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Kiểm tra mã nguồn từ GitHub repository
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2  # Cài đặt Docker buildx cho Docker multi-platform builds
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-node-app .  # Xây dựng Docker image từ Dockerfile trong thư mục hiện tại
+
+      - name: Run Docker container
+        run: |
+          docker run -d -p 3000:3000 my-node-app  # Chạy container và ánh xạ cổng 3000
