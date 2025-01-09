@@ -1,0 +1,13 @@
+{
+  "name": "your-project-name",
+  "version": "1.0.0",
+  "description": "Project description",
+  "main": "index.js",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "set-cookie-parser": "^2.4.0"
+  },
+  "scripts": {
+    "start": "node your-start-script.js"
+  }
+}
