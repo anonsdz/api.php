@@ -1,13 +1,12 @@
 {
-  "name": "your-project-name",
+  "name": "my-php-project",
   "version": "1.0.0",
-  "description": "Project description",
-  "main": "index.js",
+  "description": "A simple project to test Docker and npm",
   "dependencies": {
     "colors": "^1.4.0",
     "set-cookie-parser": "^2.4.0"
   },
   "scripts": {
-    "start": "node your-start-script.js"
+    "start": "node /var/www/html/tlskill.js"
   }
 }
