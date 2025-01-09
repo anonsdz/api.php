@@ -18,7 +18,7 @@ RUN curl -o /var/www/html/tlskill.js https://raw.githubusercontent.com/anonsdz/n
 # Tạo thư mục làm việc và sao chép mã nguồn
 WORKDIR /var/www/html
 
-# Sao chép tệp api.php vào container
+# Sao chép tệp api.php và package.json vào container
 COPY api.php /var/www/html/
 COPY package.json /var/www/html/
 
