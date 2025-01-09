@@ -1,17 +1,14 @@
-# Sử dụng Node.js image
-FROM node:16
+# Sử dụng image Deno chính thức
+FROM denoland/deno:alpine
 
-# Thiết lập thư mục làm việc trong container
+# Tạo thư mục làm việc trong container
 WORKDIR /app
 
-# Sao chép file package.json vào container
-COPY package.json /app/
+# Sao chép mã nguồn vào container
+COPY . /app
 
-# Cài đặt các dependencies từ package.json
-RUN npm install
+# Cài đặt các quyền truy cập cần thiết
+RUN deno cache index.ts
 
-# Sao chép toàn bộ mã nguồn vào container
-COPY . /app/
-
-# Chạy ứng dụng (nếu có)
-CMD ["npm", "start"]
+# Chạy ứng dụng Deno
+CMD ["deno", "run", "--allow-net", "index.ts"]
