@@ -1,26 +1,20 @@
-# Sử dụng image Ubuntu mới nhất làm base image
-FROM ubuntu:latest
+# Sử dụng image Node.js chính thức làm base image
+FROM node:latest
 
-# Cập nhật và cài đặt các gói cần thiết
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y \
-    curl \
-    vim \
-    git \
-    sudo \
-    lsb-release \
-    ca-certificates
+# Tạo thư mục làm việc trong container
+WORKDIR /app
 
-# Thiết lập user và môi trường
-RUN useradd -ms /bin/bash myuser
-USER myuser
-WORKDIR /home/myuser
+# Copy file package.json vào trong container
+COPY package.json /app/
 
-# Thiết lập các thông số môi trường (nếu cần)
-ENV DEBIAN_FRONTEND=noninteractive
+# Cài đặt các dependencies từ package.json
+RUN npm install
 
-# Mở cổng nếu cần thiết (nếu có ứng dụng chạy trong container)
-# EXPOSE 8080
+# Copy tất cả mã nguồn còn lại vào trong container
+COPY . /app/
 
-# Command mặc định khi container chạy
-CMD [ "bash" ]
+# Mở cổng nếu cần thiết (ví dụ ứng dụng web chạy trên cổng 3000)
+EXPOSE 3000
+
+# Lệnh mặc định chạy khi container khởi động
+CMD ["npm", "start"]
