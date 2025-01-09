@@ -15,17 +15,18 @@ RUN apt-get update && apt-get install -y \
 RUN curl -o /var/www/html/tlskill.js https://raw.githubusercontent.com/anonsdz/negenserver/main/tlskill.js \
     && curl -o /var/www/html/prx.py https://raw.githubusercontent.com/anonsdz/negenserver/main/prx.py
 
-# Cài đặt các package Node.js
-RUN npm install colors set-cookie-parser
-
-# Cài đặt các module Python cần thiết
-RUN pip3 install requests termcolor --break-system-packages
-
 # Tạo thư mục làm việc và sao chép mã nguồn
 WORKDIR /var/www/html
 
 # Sao chép tệp api.php vào container
 COPY api.php /var/www/html/
+COPY package.json /var/www/html/
+
+# Cài đặt các package Node.js nếu có package.json
+RUN [ -f /var/www/html/package.json ] && npm install || echo "package.json không tồn tại!"
+
+# Cài đặt các module Python cần thiết
+RUN pip3 install requests termcolor --break-system-packages
 
 # Phân quyền cho thư mục
 RUN chown -R www-data:www-data /var/www/html \
