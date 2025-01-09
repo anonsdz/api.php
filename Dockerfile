@@ -22,7 +22,7 @@ WORKDIR /var/www/html
 COPY api.php /var/www/html/
 COPY package.json /var/www/html/
 
-# Cài đặt các package Node.js nếu có package.json
+# Kiểm tra xem file package.json có tồn tại không và cài đặt Node.js packages
 RUN [ -f /var/www/html/package.json ] && npm install || echo "package.json không tồn tại!"
 
 # Cài đặt các module Python cần thiết
